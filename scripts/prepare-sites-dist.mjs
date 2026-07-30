@@ -1,25 +1,50 @@
 import { copyFile, cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { build } from "vite";
+import vinext from "vinext";
 
 const projectRoot = process.cwd();
 const distDir = path.join(projectRoot, "dist");
 const serverDir = path.join(distDir, "server");
 const bundledServerDir = path.join(distDir, ".sites-server");
 const hostingDir = path.join(distDir, ".openai");
+const pagesWorkerEntry = fileURLToPath(
+  import.meta.resolve("vinext/server/pages-router-entry"),
+);
 
 await mkdir(serverDir, { recursive: true });
 await mkdir(hostingDir, { recursive: true });
 
-// Sites deploys only dist/, so bundle Vinext's external React dependencies
-// into the stable server/index.js entrypoint used by the production runtime.
+const bundleServerDependencies = {
+  name: "soillens:bundle-sites-worker-dependencies",
+  enforce: "post",
+  configEnvironment(name, config) {
+    if (name !== "ssr" || !Array.isArray(config.resolve?.external)) return;
+    config.resolve.external = config.resolve.external.filter(
+      (id) =>
+        id !== "react" &&
+        id !== "react-dom" &&
+        id !== "react-dom/server" &&
+        id !== "react-dom/server.edge" &&
+        id !== "react/jsx-runtime",
+    );
+  },
+};
+
+// Sites runs a Worker-style fetch entrypoint and deploys only dist/. Build
+// Vinext's Pages Router worker with all browser-framework dependencies bundled.
 await build({
   configFile: false,
   root: projectRoot,
   publicDir: false,
   logLevel: "warn",
+  plugins: [
+    vinext({ disableAppRouter: true }),
+    bundleServerDependencies,
+  ],
   build: {
-    ssr: path.join(serverDir, "entry.js"),
+    ssr: pagesWorkerEntry,
     outDir: bundledServerDir,
     emptyOutDir: true,
     minify: true,
