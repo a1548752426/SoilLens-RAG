@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SoilLens · 土壤环境文档智能问答</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <div>
+            <strong>SoilLens</strong>
+            <span>土壤环境文献助手</span>
+          </div>
+        </div>
+
+        <section class="side-section">
+          <div class="section-title">
+            <span>文档库</span>
+            <button id="rebuildButton" class="icon-button" title="重新建立索引">↻</button>
+          </div>
+          <div id="libraryStats" class="library-stats">正在建立索引…</div>
+          <div id="documentList" class="document-list"></div>
+        </section>
+
+        <div id="privacyNote" class="privacy-note">
+          <span class="privacy-dot"></span>
+          本机论文和私有数据不会上传
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">EVIDENCE-FIRST RESEARCH</p>
+            <h1>让每个回答都能回到原文</h1>
+          </div>
+          <div id="modeBadge" class="mode-badge">检测运行模式…</div>
+        </header>
+
+        <div id="profileNotice" class="profile-notice hidden"></div>
+
+        <nav class="workspace-tabs" aria-label="功能选择">
+          <button class="workspace-tab active" data-view="qa">文献问答</button>
+          <button class="workspace-tab" data-view="assessment">单点污染评价</button>
+          <button class="workspace-tab" data-view="batch">批量分析看板</button>
+          <button class="workspace-tab" data-view="evaluation">RAG 质量评测</button>
+        </nav>
+
+        <div id="qaView">
+          <section class="hero-card">
+            <div class="hero-copy">
+              <span id="heroLabel" class="hero-label">本机知识库</span>
+              <h2>询问土壤重金属研究问题</h2>
+              <p id="heroDescription">系统先检索论文证据，再回答问题；每条来源都标注文档名称和 PDF 页码。</p>
+            </div>
+            <div class="soil-orbit" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+          </section>
+
+          <section class="question-panel">
+            <form id="questionForm">
+              <label for="questionInput">你的问题</label>
+              <textarea
+                id="questionInput"
+                rows="3"
+                placeholder="例如：机器学习如何用于确定土壤重金属自然背景值？"
+                required
+              ></textarea>
+              <div class="form-actions">
+                <label class="toggle">
+                  <input id="useLlm" type="checkbox" checked />
+                  <span>使用 AI 综合回答</span>
+                </label>
+                <button id="askButton" class="primary-button" type="submit">
+                  <span>检索并回答</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </form>
+            <div class="suggestions">
+              <button>机器学习如何确定重金属自然背景值？</button>
+              <button>深层土壤重金属修复面临哪些困难？</button>
+              <button>竹子修复重金属污染土壤有什么优势？</button>
+              <button>喀斯特地区重金属富集和迁移有什么特点？</button>
+            </div>
+          </section>
+
+          <section id="resultPanel" class="result-panel hidden" aria-live="polite">
+            <div class="result-heading">
+              <div>
+                <span class="result-kicker">回答</span>
+                <h2 id="resultQuestion"></h2>
+              </div>
+              <span id="resultMode" class="result-mode"></span>
+            </div>
+            <div id="warningBox" class="warning hidden"></div>
+            <div id="answerBox" class="answer"></div>
+
+            <div class="sources-heading">
+              <div>
+                <span class="result-kicker">证据来源</span>
+                <h3>可核对的原文页面</h3>
+              </div>
+              <span id="sourceCount"></span>
+            </div>
+            <div id="sourceList" class="source-list"></div>
+          </section>
+
+          <section id="emptyState" class="empty-state">
+            <div class="empty-icon">“</div>
+            <p>选择一个示例问题，或输入你自己的研究问题。</p>
+          </section>
+        </div>
+
+        <div id="assessmentView" class="hidden">
+          <section class="assessment-hero">
+            <div>
+              <span class="hero-label">SAMPLE ASSESSMENT</span>
+              <h2>单点土壤重金属污染评价</h2>
+              <p>选择 Excel 样点或自定义输入，按杭州土壤背景值计算 CF、Igeo 和 PLI。</p>
+            </div>
+            <div class="method-pills">
+              <span>CF</span><span>Igeo</span><span>PLI</span>
+            </div>
+          </section>
+
+          <section class="assessment-input-panel">
+            <div class="assessment-panel-heading">
+              <div>
+                <span class="result-kicker">样点数据</span>
+                <h3>选择样点并核对浓度</h3>
+              </div>
+              <span id="sampleCount" class="result-mode">读取中…</span>
+            </div>
+
+            <label class="field-label" for="sampleSelect">样点来源</label>
+            <select id="sampleSelect"></select>
+            <label id="customNameField" class="custom-name-field" for="customSampleName">
+              <span>自定义样点名称（可选）</span>
+              <input id="customSampleName" maxlength="80" placeholder="例如：补充样点 A" />
+            </label>
+            <p class="input-hint">只填写有检测结果的元素；空白元素不会参与计算。</p>
+            <div id="metalInputs" class="metal-input-grid"></div>
+            <div id="datasetNote" class="warning"></div>
+
+            <div class="assessment-actions">
+              <a id="backgroundSourceLink" class="source-link" target="_blank" rel="noreferrer">
+                查看背景值来源：表 12，PDF 第 16 页 ↗
+              </a>
+              <button id="assessButton" class="primary-button" type="button">
+                <span>开始评价</span><span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </section>
+
+          <section id="assessmentResult" class="assessment-result hidden" aria-live="polite">
+            <div class="assessment-panel-heading">
+              <div>
+                <span class="result-kicker">评价结果</span>
+                <h3 id="assessmentTitle"></h3>
+              </div>
+              <span id="assessmentScope" class="result-mode"></span>
+            </div>
+
+            <div id="summaryCards" class="summary-grid"></div>
+            <div id="assessmentWarnings"></div>
+
+            <div class="table-wrap">
+              <table class="assessment-table">
+                <thead>
+                  <tr>
+                    <th>元素</th>
+                    <th>浓度</th>
+                    <th>背景值</th>
+                    <th>CF</th>
+                    <th>CF 分级</th>
+                    <th>Igeo</th>
+                    <th>Igeo 分级</th>
+                  </tr>
+                </thead>
+                <tbody id="assessmentRows"></tbody>
+              </table>
+            </div>
+
+            <div class="method-card">
+              <div>
+                <span class="result-kicker">计算方法</span>
+                <h3>所有结果都可复算</h3>
+              </div>
+              <div id="formulaList" class="formula-list"></div>
+              <p>
+                C 为样点浓度，B 为杭州背景值。背景值来源：
+                <a id="resultSourceLink" target="_blank" rel="noreferrer"></a>
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <div id="batchView" class="hidden">
+          <section class="assessment-hero batch-hero">
+            <div>
+              <span class="hero-label">PRIVATE ANALYTICS</span>
+              <h2>土壤重金属批量评价看板</h2>
+              <p>汇总全部私有样点的 PLI、元素超背景率与重点样点，只在本机计算和展示。</p>
+            </div>
+            <div class="batch-hero-actions">
+              <button id="batchRefreshButton" class="light-button" type="button">重新计算</button>
+              <a
+                id="batchExportLink"
+                class="export-button"
+                href="/api/assessment/batch/export"
+                download="SoilLens_batch_assessment.xlsx"
+              >导出 Excel</a>
+            </div>
+          </section>
+
+          <section id="batchLoading" class="batch-loading">
+            <span class="loading-ring"></span>
+            <p>正在本机计算全部样点评价结果…</p>
+          </section>
+
+          <div id="batchDashboard" class="hidden">
+            <section class="batch-summary-panel">
+              <div class="assessment-panel-heading">
+                <div>
+                  <span class="result-kicker">批量总览</span>
+                  <h3>整体污染情况</h3>
+                </div>
+                <span id="batchScope" class="result-mode"></span>
+              </div>
+              <div id="batchSummaryCards" class="summary-grid"></div>
+              <div id="batchNote" class="warning"></div>
+            </section>
+
+            <section class="chart-grid">
+              <article class="chart-card">
+                <div class="chart-heading">
+                  <div>
+                    <span class="result-kicker">PLI 分布</span>
+                    <h3>综合污染状态</h3>
+                  </div>
+                </div>
+                <div id="pliDistributionChart" class="chart-canvas"></div>
+              </article>
+
+              <article class="chart-card">
+                <div class="chart-heading">
+                  <div>
+                    <span class="result-kicker">元素比较</span>
+                    <h3>超过杭州背景值的样点比例</h3>
+                  </div>
+                </div>
+                <div id="metalExceedanceChart" class="chart-canvas"></div>
+              </article>
+
+              <article class="chart-card chart-wide">
+                <div class="chart-heading">
+                  <div>
+                    <span class="result-kicker">重点样点</span>
+                    <h3>PLI 最高的 10 个样点</h3>
+                  </div>
+                  <span class="chart-note">虚线为 PLI = 1</span>
+                </div>
+                <div id="topSamplesChart" class="chart-canvas chart-tall"></div>
+              </article>
+            </section>
+
+            <section class="batch-table-panel">
+              <div class="batch-table-heading">
+                <div>
+                  <span class="result-kicker">样点明细</span>
+                  <h3>排序、筛选并进入单点详情</h3>
+                </div>
+                <div class="batch-filters">
+                  <input id="batchSearchInput" placeholder="搜索编号或样点名称" />
+                  <select id="batchGradeFilter">
+                    <option value="all">全部状态</option>
+                    <option value="polluted">PLI &gt; 1</option>
+                    <option value="clean">PLI ≤ 1</option>
+                  </select>
+                </div>
+              </div>
+              <div class="batch-table-meta">
+                <span id="batchVisibleCount"></span>
+                <span>默认按 PLI 从高到低排列</span>
+              </div>
+              <div class="table-wrap batch-table-wrap">
+                <table class="assessment-table batch-table">
+                  <thead>
+                    <tr>
+                      <th>排名</th>
+                      <th>样点</th>
+                      <th>PLI</th>
+                      <th>状态</th>
+                      <th>超背景元素</th>
+                      <th>最高 CF</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="batchRows"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div id="evaluationView" class="hidden">
+          <section class="assessment-hero evaluation-hero">
+            <div>
+              <span class="hero-label">RETRIEVAL EVALUATION</span>
+              <h2>RAG 检索质量评测</h2>
+              <p>用冻结题集检查正确文档、正确页码和越界拒答，不靠主观试问判断效果。</p>
+            </div>
+            <div class="evaluation-hero-actions">
+              <select id="evaluationDataset" aria-label="选择评测集">
+                <option value="blind">独立盲测集 · 15 题</option>
+                <option value="development">开发回归集 · 30 题</option>
+              </select>
+              <button id="evaluationRunButton" class="light-button" type="button">重新运行评测</button>
+            </div>
+          </section>
+
+          <section id="evaluationLoading" class="batch-loading">
+            <span class="loading-ring"></span>
+            <p>正在用当前索引逐题检索并核对标准答案…</p>
+          </section>
+
+          <div id="evaluationDashboard" class="hidden">
+            <section class="batch-summary-panel">
+              <div class="assessment-panel-heading">
+                <div>
+                  <span class="result-kicker">当前结果</span>
+                  <h3>固定测试集上的检索表现</h3>
+                </div>
+                <span id="evaluationScope" class="result-mode"></span>
+              </div>
+              <div id="evaluationSummaryCards" class="summary-grid"></div>
+              <div id="evaluationNote" class="warning"></div>
+            </section>
+
+            <section class="evaluation-grid">
+              <article class="chart-card">
+                <div class="chart-heading">
+                  <div>
+                    <span class="result-kicker">优化对比</span>
+                    <h3>基线与当前版本</h3>
+                  </div>
+                </div>
+                <div id="evaluationComparison" class="metric-comparison"></div>
+              </article>
+
+              <article class="chart-card">
+                <div class="chart-heading">
+                  <div>
+                    <span class="result-kicker">分论文结果</span>
+                    <h3>正确页码命中率</h3>
+                  </div>
+                </div>
+                <div id="evaluationDocumentChart" class="chart-canvas chart-tall"></div>
+              </article>
+            </section>
+
+            <section class="batch-table-panel">
+              <div class="batch-table-heading">
+                <div>
+                  <span class="result-kicker">逐题证据</span>
+                  <h3>查看命中结果和失败项</h3>
+                </div>
+                <div class="batch-filters">
+                  <select id="evaluationFilter">
+                    <option value="all">全部题目</option>
+                    <option value="failed">仅看失败</option>
+                    <option value="passed">仅看通过</option>
+                    <option value="answerable">可回答题</option>
+                    <option value="unanswerable">无答案题</option>
+                  </select>
+                </div>
+              </div>
+              <div class="batch-table-meta">
+                <span id="evaluationVisibleCount"></span>
+                <span>点击页码可直接打开论文原文</span>
+              </div>
+              <div class="table-wrap evaluation-table-wrap">
+                <table class="assessment-table evaluation-table">
+                  <thead>
+                    <tr>
+                      <th>题号</th>
+                      <th>问题</th>
+                      <th>正确证据</th>
+                      <th>首条检索结果</th>
+                      <th>结果</th>
+                    </tr>
+                  </thead>
+                  <tbody id="evaluationRows"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/assets/vendor/echarts.min.js"></script>
+    <script src="/assets/app.js"></script>
+  </body>
+</html>

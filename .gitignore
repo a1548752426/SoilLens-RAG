@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.cache/
+tmp/
+outputs/
+private_data/
+sample_data/*.xlsx
+/*.pdf
+/background_values/*.pdf

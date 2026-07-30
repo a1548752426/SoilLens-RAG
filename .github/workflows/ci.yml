@@ -1,0 +1,50 @@
+name: SoilLens CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  public-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+
+      - name: Run calculation and privacy tests
+        env:
+          SOILLENS_DISABLE_SEMANTIC: "1"
+        run: |
+          python -m unittest discover -s tests -p "test_assessment.py" -v
+          python -m unittest discover -s tests -p "test_privacy.py" -v
+          python -m unittest discover -s tests -p "test_demo_profile.py" -v
+
+      - name: Build public demo image
+        run: docker build --tag soillens:ci .
+
+      - name: Verify container health
+        run: |
+          docker run --detach --name soillens-ci --publish 8000:8000 soillens:ci
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8000/api/health > health.json; then
+              break
+            fi
+            sleep 2
+          done
+          python -c "import json; d=json.load(open('health.json', encoding='utf-8')); assert d['status']=='ok' and d['profile']=='demo' and d['documents']==3, d"
+          docker logs soillens-ci
+

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "ML-01",
+    "question": "研究用于预测哪些六种土壤重金属的自然背景值，并比较了哪四种机器学习算法？",
+    "answerable": true,
+    "expected_title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+    "expected_pages": [13],
+    "category": "研究设计"
+  },
+  {
+    "id": "ML-02",
+    "question": "BA值和SAF值分别用于表示什么土壤风化信息，为什么将它们作为模型输入？",
+    "answerable": true,
+    "expected_title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+    "expected_pages": [4],
+    "category": "特征工程"
+  },
+  {
+    "id": "ML-03",
+    "question": "研究用哪些指标评价模型预测性能，SHAP在其中承担什么作用？",
+    "answerable": true,
+    "expected_title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+    "expected_pages": [6],
+    "category": "模型评估"
+  },
+  {
+    "id": "ML-04",
+    "question": "Cd、Cr、Ni与Cu、Pb、Zn分别由哪类模型取得最佳预测结果？",
+    "answerable": true,
+    "expected_title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+    "expected_pages": [9],
+    "category": "模型结果"
+  },
+  {
+    "id": "ML-05",
+    "question": "SHAP分析指出Cd、Cr、Cu、Zn、Ni和Pb最重要的影响因素分别是什么？",
+    "answerable": true,
+    "expected_title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+    "expected_pages": [11],
+    "category": "模型解释"
+  },
+  {
+    "id": "AP-01",
+    "question": "BAMC的定向孔结构如何制备，代表性平均孔宽约为多少？",
+    "answerable": true,
+    "expected_title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+    "expected_pages": [3],
+    "category": "材料制备"
+  },
+  {
+    "id": "AP-02",
+    "question": "太阳蒸发驱动装置如何通过蒸腾、吸附和对流迁移Cu离子？",
+    "answerable": true,
+    "expected_title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+    "expected_pages": [4],
+    "category": "作用机制"
+  },
+  {
+    "id": "AP-03",
+    "question": "随着蒸发速率增加，离子迁移机制如何从扩散控制转变为对流驱动？",
+    "answerable": true,
+    "expected_title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+    "expected_pages": [5],
+    "category": "传质机制"
+  },
+  {
+    "id": "AP-04",
+    "question": "文中提出的临界深度以上和以下，离子运输分别受什么机制控制？",
+    "answerable": true,
+    "expected_title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+    "expected_pages": [6],
+    "category": "深层修复"
+  },
+  {
+    "id": "AP-05",
+    "question": "BAMC在不同土壤质地中哪一种修复效率最高，作者给出的原因是什么？",
+    "answerable": true,
+    "expected_title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+    "expected_pages": [8],
+    "category": "适用条件"
+  },
+  {
+    "id": "BR-01",
+    "question": "农业土壤重金属修复为什么要同时优先考虑食品安全、环境可持续性和成本？",
+    "answerable": true,
+    "expected_title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+    "expected_pages": [2],
+    "category": "修复原则"
+  },
+  {
+    "id": "BR-02",
+    "question": "植物面对重金属时的两种主要抗性策略是什么？",
+    "answerable": true,
+    "expected_title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+    "expected_pages": [3],
+    "category": "植物抗性"
+  },
+  {
+    "id": "BR-03",
+    "question": "根滤或植物过滤如何工作，文中列举的代表性作物是什么？",
+    "answerable": true,
+    "expected_title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+    "expected_pages": [4],
+    "category": "植物修复"
+  },
+  {
+    "id": "BR-04",
+    "question": "使用螯合剂或降pH改良剂促进植物提取时，需要关注哪些生态风险？",
+    "answerable": true,
+    "expected_title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+    "expected_pages": [5],
+    "category": "风险控制"
+  },
+  {
+    "id": "BR-05",
+    "question": "在农业土壤中释放转基因微生物面临哪些生物安全问题？",
+    "answerable": true,
+    "expected_title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+    "expected_pages": [8],
+    "category": "生物安全"
+  },
+  {
+    "id": "KC-01",
+    "question": "为什么研究用1.5到2.0米亚表层土壤作为近自然背景参照？",
+    "answerable": true,
+    "expected_title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+    "expected_pages": [3],
+    "category": "背景参照"
+  },
+  {
+    "id": "KC-02",
+    "question": "富集系数EC如何计算，各等级如何划分？",
+    "answerable": true,
+    "expected_title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+    "expected_pages": [5],
+    "category": "评价方法"
+  },
+  {
+    "id": "KC-03",
+    "question": "半变异函数的块金比如何区分强、中、弱空间自相关，它们分别暗示什么控制因素？",
+    "answerable": true,
+    "expected_title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+    "expected_pages": [6],
+    "category": "空间统计"
+  },
+  {
+    "id": "KC-04",
+    "question": "喀斯特区与非喀斯特区土壤重金属含量总体有何差异？",
+    "answerable": true,
+    "expected_title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+    "expected_pages": [7],
+    "category": "区域差异"
+  },
+  {
+    "id": "KC-05",
+    "question": "全区、喀斯特区和非喀斯特区中哪种元素的中位富集系数最高？",
+    "answerable": true,
+    "expected_title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+    "expected_pages": [8],
+    "category": "富集结果"
+  },
+  {
+    "id": "BB-01",
+    "question": "竹类用于重金属污染土壤修复具有哪些形态和生长优势？",
+    "answerable": true,
+    "expected_title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+    "expected_pages": [2],
+    "category": "植物优势"
+  },
+  {
+    "id": "BB-02",
+    "question": "毛竹对Cr的耐受水平和去除率在文中如何报告？",
+    "answerable": true,
+    "expected_title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+    "expected_pages": [6],
+    "category": "修复效果"
+  },
+  {
+    "id": "BB-03",
+    "question": "竹类在重金属胁迫下如何利用抗氧化系统抵御ROS损伤？",
+    "answerable": true,
+    "expected_title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+    "expected_pages": [7],
+    "category": "耐受机制"
+  },
+  {
+    "id": "BB-04",
+    "question": "植物螯合肽PCs如何降低细胞内游离重金属离子的毒性？",
+    "answerable": true,
+    "expected_title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+    "expected_pages": [9],
+    "category": "解毒机制"
+  },
+  {
+    "id": "BB-05",
+    "question": "竹子与伴矿景天间作如何影响Cu、Cd、Zn的吸收和转运？",
+    "answerable": true,
+    "expected_title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+    "expected_pages": [10],
+    "category": "联合修复"
+  },
+  {
+    "id": "NA-01",
+    "question": "这些论文是否比较了Transformer、BERT和GPT-4在土壤问答中的性能？",
+    "answerable": false,
+    "expected_title": null,
+    "expected_pages": [],
+    "category": "无答案"
+  },
+  {
+    "id": "NA-02",
+    "question": "文献给出了杭州市2025年各行政区土壤重金属监管罚款金额吗？",
+    "answerable": false,
+    "expected_title": null,
+    "expected_pages": [],
+    "category": "无答案"
+  },
+  {
+    "id": "NA-03",
+    "question": "研究是否报告了月球土壤中八种重金属的背景值？",
+    "answerable": false,
+    "expected_title": null,
+    "expected_pages": [],
+    "category": "无答案"
+  },
+  {
+    "id": "NA-04",
+    "question": "论文中哪一种方法将土壤修复成本降低到每亩100元以下？",
+    "answerable": false,
+    "expected_title": null,
+    "expected_pages": [],
+    "category": "无答案"
+  },
+  {
+    "id": "NA-05",
+    "question": "这些研究是否提供了患者临床试验中的血铅浓度和治疗方案？",
+    "answerable": false,
+    "expected_title": null,
+    "expected_pages": [],
+    "category": "无答案"
+  }
+]

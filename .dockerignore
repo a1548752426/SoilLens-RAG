@@ -1,0 +1,16 @@
+.git/
+.github/
+.venv/
+.cache/
+tmp/
+outputs/
+private_data/
+sample_data/
+background_values/
+evaluation/
+/*.pdf
+**/__pycache__/
+**/*.py[cod]
+*.log
+.env
+

@@ -1,0 +1,50 @@
+{
+  "label": "优化前基线",
+  "description": "同一套 30 题在补充土壤环境中英术语映射前的 TF-IDF 混合检索结果。",
+  "summary": {
+    "question_count": 30,
+    "answerable_count": 25,
+    "unanswerable_count": 5,
+    "top_k": 5,
+    "confidence_threshold": 0.13,
+    "document_recall_at_k": 0.84,
+    "page_hit_at_k": 0.4,
+    "answerable_acceptance_rate": 0.04,
+    "mrr_document": 0.6913,
+    "unanswerable_rejection_rate": 1.0,
+    "scope_boundary_accuracy": 0.2,
+    "overall_pass_rate": 0.5
+  },
+  "per_document": [
+    {
+      "title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+      "question_count": 5,
+      "document_recall_at_k": 0.6,
+      "page_hit_at_k": 0.4
+    },
+    {
+      "title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+      "question_count": 5,
+      "document_recall_at_k": 0.8,
+      "page_hit_at_k": 0.2
+    },
+    {
+      "title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+      "question_count": 5,
+      "document_recall_at_k": 0.8,
+      "page_hit_at_k": 0.4
+    },
+    {
+      "title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+      "question_count": 5,
+      "document_recall_at_k": 1.0,
+      "page_hit_at_k": 0.6
+    },
+    {
+      "title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+      "question_count": 5,
+      "document_recall_at_k": 1.0,
+      "page_hit_at_k": 0.4
+    }
+  ]
+}

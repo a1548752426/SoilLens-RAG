@@ -1,0 +1,24 @@
+services:
+  soillens:
+    build:
+      context: .
+    ports:
+      - "${SOILLENS_PORT:-8000}:8000"
+    environment:
+      SOILLENS_PROFILE: demo
+      SOILLENS_DISABLE_SEMANTIC: "${SOILLENS_DISABLE_SEMANTIC:-1}"
+      SOILLENS_CACHE_DIR: /app/.cache
+    read_only: true
+    tmpfs:
+      - /tmp
+    volumes:
+      - soillens_cache:/app/.cache
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+
+volumes:
+  soillens_cache:
+

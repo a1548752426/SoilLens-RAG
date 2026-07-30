@@ -1,0 +1,40 @@
+{
+  "label": "多语种混合检索复测",
+  "dataset_sha256": "59DF84046B492D2BC6237653CC2A74E93DEE0BD471EF16E45FF8AF4AEBD56C2C",
+  "retrieval": {
+    "lexical": "word and character TF-IDF",
+    "semantic_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "semantic_model_license": "Apache-2.0",
+    "fusion": "adaptive reciprocal rank fusion",
+    "rrf_k": 10,
+    "semantic_weight": 2.0,
+    "lexical_route_threshold": 0.11,
+    "page_diversity": "one result per document page"
+  },
+  "blind_baseline": {
+    "document_recall_at_5": 0.8889,
+    "page_hit_at_5": 0.2222,
+    "answerable_acceptance_rate": 0.6667,
+    "unanswerable_rejection_rate": 1.0,
+    "scope_boundary_accuracy": 0.8,
+    "overall_pass_rate": 0.5333
+  },
+  "blind_hybrid": {
+    "document_recall_at_5": 1.0,
+    "page_hit_at_5": 0.7778,
+    "answerable_acceptance_rate": 1.0,
+    "unanswerable_rejection_rate": 1.0,
+    "scope_boundary_accuracy": 1.0,
+    "overall_pass_rate": 0.8667,
+    "remaining_page_failures": ["BL-A07", "BL-A08"]
+  },
+  "development_regression": {
+    "question_count": 30,
+    "document_recall_at_5": 1.0,
+    "page_hit_at_5": 0.96,
+    "answerable_acceptance_rate": 1.0,
+    "unanswerable_rejection_rate": 1.0,
+    "scope_boundary_accuracy": 1.0,
+    "overall_pass_rate": 0.9667
+  }
+}

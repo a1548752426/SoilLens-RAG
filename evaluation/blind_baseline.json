@@ -1,0 +1,53 @@
+{
+  "label": "独立盲测首次运行",
+  "description": "冻结15道新题后，在未针对这些题修改检索或边界规则时记录的首次结果。",
+  "dataset_sha256": "59DF84046B492D2BC6237653CC2A74E93DEE0BD471EF16E45FF8AF4AEBD56C2C",
+  "summary": {
+    "question_count": 15,
+    "answerable_count": 9,
+    "unanswerable_count": 6,
+    "top_k": 5,
+    "confidence_threshold": 0.06,
+    "document_recall_at_k": 0.8889,
+    "page_hit_at_k": 0.2222,
+    "answerable_acceptance_rate": 0.6667,
+    "mrr_document": 0.8056,
+    "unanswerable_rejection_rate": 1.0,
+    "scope_boundary_accuracy": 0.8,
+    "overall_pass_rate": 0.5333,
+    "mean_top_score_answerable": 0.0716,
+    "mean_top_score_unanswerable": 0.0265
+  },
+  "per_document": [
+    {
+      "title": "Bioinspired Artificial Plant for Deep Soil Heavy Metal Remediation",
+      "question_count": 1,
+      "document_recall_at_k": 1.0,
+      "page_hit_at_k": 1.0
+    },
+    {
+      "title": "Bioremediation of heavy metal(loid)s in agricultural soils and crops",
+      "question_count": 2,
+      "document_recall_at_k": 0.5,
+      "page_hit_at_k": 0.0
+    },
+    {
+      "title": "Characteristics of soil heavy metal content, enrichment, and migration in a typical karst county",
+      "question_count": 2,
+      "document_recall_at_k": 1.0,
+      "page_hit_at_k": 0.0
+    },
+    {
+      "title": "Machine learning-supported determination for site-specific natural background values of soil heavy metals",
+      "question_count": 2,
+      "document_recall_at_k": 1.0,
+      "page_hit_at_k": 0.0
+    },
+    {
+      "title": "Research on the role of bamboo species in the restoration of heavy metal-contaminated soil",
+      "question_count": 2,
+      "document_recall_at_k": 1.0,
+      "page_hit_at_k": 0.5
+    }
+  ]
+}
