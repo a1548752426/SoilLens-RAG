@@ -10,3 +10,7 @@ private_data/
 sample_data/*.xlsx
 /*.pdf
 /background_values/*.pdf
+node_modules/
+.next/
+.open-next/
+*.tgz

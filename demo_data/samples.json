@@ -1,0 +1,14 @@
+[
+  {"sample_id":"DEMO-001","name":"合成样点 A（低水平）","concentrations":{"As":3.0,"Cd":0.077,"Cr":34.2,"Mn":279.0,"Ni":15.6,"Cu":9.6,"Pb":12.6,"Zn":40.8}},
+  {"sample_id":"DEMO-002","name":"合成样点 B（近背景）","concentrations":{"As":4.5,"Cd":0.121,"Cr":51.3,"Mn":511.5,"Ni":23.4,"Cu":17.6,"Pb":18.9,"Zn":74.8}},
+  {"sample_id":"DEMO-003","name":"合成样点 C（轻度富集）","concentrations":{"As":7.5,"Cd":0.22,"Cr":68.4,"Mn":418.5,"Ni":31.2,"Cu":24.0,"Pb":31.5,"Zn":81.6}},
+  {"sample_id":"DEMO-004","name":"合成样点 D（Cd/Pb 偏高）","concentrations":{"As":5.5,"Cd":0.44,"Cr":57.0,"Mn":465.0,"Ni":26.0,"Cu":19.2,"Pb":63.0,"Zn":68.0}},
+  {"sample_id":"DEMO-005","name":"合成样点 E（Cr/Mn 偏高）","concentrations":{"As":4.0,"Cd":0.099,"Cr":114.0,"Mn":697.5,"Ni":28.6,"Cu":14.4,"Pb":16.8,"Zn":61.2}},
+  {"sample_id":"DEMO-006","name":"合成样点 F（Cu/Zn 偏高）","concentrations":{"As":5.0,"Cd":0.132,"Cr":62.7,"Mn":488.25,"Ni":23.4,"Cu":48.0,"Pb":25.2,"Zn":136.0}},
+  {"sample_id":"DEMO-007","name":"合成样点 G（Ni 偏高）","concentrations":{"As":6.0,"Cd":0.11,"Cr":45.6,"Mn":372.0,"Ni":65.0,"Cu":20.8,"Pb":23.1,"Zn":54.4}},
+  {"sample_id":"DEMO-008","name":"合成样点 H（背景水平）","concentrations":{"As":5.0,"Cd":0.11,"Cr":57.0,"Mn":465.0,"Ni":26.0,"Cu":16.0,"Pb":21.0,"Zn":68.0}},
+  {"sample_id":"DEMO-009","name":"合成样点 I（整体较低）","concentrations":{"As":2.5,"Cd":0.055,"Cr":28.5,"Mn":232.5,"Ni":13.0,"Cu":8.0,"Pb":10.5,"Zn":34.0}},
+  {"sample_id":"DEMO-010","name":"合成样点 J（多元素高值）","concentrations":{"As":30.0,"Cd":0.88,"Cr":171.0,"Mn":930.0,"Ni":78.0,"Cu":64.0,"Pb":105.0,"Zn":272.0}},
+  {"sample_id":"DEMO-011","name":"合成样点 K（仅 As/Pb）","concentrations":{"As":8.0,"Pb":35.0}},
+  {"sample_id":"DEMO-012","name":"合成样点 L（仅 Cd/Zn）","concentrations":{"Cd":0.33,"Zn":102.0}}
+]
