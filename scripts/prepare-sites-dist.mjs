@@ -8,6 +8,7 @@ const projectRoot = process.cwd();
 const distDir = path.join(projectRoot, "dist");
 const serverDir = path.join(distDir, "server");
 const bundledServerDir = path.join(distDir, ".sites-server");
+const finalServerDir = path.join(distDir, ".sites-final");
 const hostingDir = path.join(distDir, ".openai");
 const pagesWorkerEntry = fileURLToPath(
   import.meta.resolve("vinext/server/pages-router-entry"),
@@ -61,8 +62,35 @@ await build({
   },
 });
 
-await cp(bundledServerDir, serverDir, { recursive: true, force: true });
+// Vinext intentionally leaves its client-assets sidecar as a relative import.
+// Bundle the generated Worker once more so Sites receives one self-contained
+// server module plus only optional code-split chunks.
+await build({
+  configFile: false,
+  root: projectRoot,
+  publicDir: false,
+  logLevel: "warn",
+  build: {
+    ssr: path.join(bundledServerDir, "index.js"),
+    outDir: finalServerDir,
+    emptyOutDir: true,
+    minify: true,
+    rolldownOptions: {
+      external: (id) => id.startsWith("node:"),
+      output: {
+        entryFileNames: "index.js",
+        chunkFileNames: "sites-assets/[name]-[hash].js",
+      },
+    },
+  },
+  ssr: {
+    noExternal: true,
+  },
+});
+
+await cp(finalServerDir, serverDir, { recursive: true, force: true });
 await rm(bundledServerDir, { recursive: true, force: true });
+await rm(finalServerDir, { recursive: true, force: true });
 await writeFile(
   path.join(serverDir, "vinext-externals.json"),
   "[]\n",
