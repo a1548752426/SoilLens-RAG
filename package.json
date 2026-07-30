@@ -8,6 +8,7 @@
     "prebuild": "node scripts/sync-public-assets.mjs",
     "dev": "next dev",
     "build": "vinext build",
+    "postbuild": "node scripts/prepare-sites-dist.mjs",
     "start": "vinext start"
   },
   "dependencies": {
