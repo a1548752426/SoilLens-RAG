@@ -10,3 +10,10 @@ private_data/
 sample_data/*.xlsx
 /*.pdf
 /background_values/*.pdf
+node_modules/
+.node_modules_backup/
+.next/
+.open-next/
+dist/
+next-env.d.ts
+*.tgz

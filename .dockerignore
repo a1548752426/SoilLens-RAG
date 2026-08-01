@@ -2,6 +2,9 @@
 .github/
 .venv/
 .cache/
+.next/
+.open-next/
+node_modules/
 tmp/
 outputs/
 private_data/
@@ -13,4 +16,3 @@ evaluation/
 **/*.py[cod]
 *.log
 .env
-

@@ -2,6 +2,8 @@
 
 [![SoilLens CI](https://github.com/a1548752426/SoilLens-RAG/actions/workflows/ci.yml/badge.svg)](https://github.com/a1548752426/SoilLens-RAG/actions/workflows/ci.yml)
 
+[在线公开演示](https://soillens-rag.a1548752426.chatgpt.site) · 使用原创演示资料和人工合成样点，不包含真实浓度数据
+
 公开仓库默认展示原创文档和人工合成样点；真实浓度 Excel、论文 PDF、模型缓存和密钥不在仓库中。
 
 当前版本包含五个功能：
